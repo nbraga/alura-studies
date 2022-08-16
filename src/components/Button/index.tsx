@@ -1,14 +1,19 @@
-import React from 'react'
-import './style.scss'
+import style from "./Button.module.scss";
 
-const Botao = () => {
+type PrivateProps = {
+  type?: "button" | "submit" | "reset" | undefined;
+  children: string;
+  texto?: string; //Se for opcional colocar a interrogação
+};
+
+const Botao = ({ texto, children, type }: PrivateProps) => {
   return (
     <>
-    <button className='botao'>
-        Botão
-    </button>
+      <button type={type} className={style.botao}>
+        {children}
+      </button>
     </>
-  )
-}
+  );
+};
 
-export default Botao
+export default Botao;
