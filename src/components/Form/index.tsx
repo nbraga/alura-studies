@@ -1,14 +1,31 @@
 import React, { useState } from "react";
+import { ITarefa } from "../../types/tarefas";
 import Botao from "../Button";
 import style from "./Form.module.scss";
+import { v4 as uuidv4 } from "uuid";
 
-const Formulario = () => {
+// const Formulario = ({ setTarefas }: { setTarefas: any }) => {
+const Formulario = ({
+  setTarefas,
+}: {
+  setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>;
+}) => {
   const [tarefa, setTarefa] = useState("");
   const [tempo, setTempo] = useState("00:00");
 
   const adicionarTarefa = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(tarefa, tempo);
+    setTarefas((tarefasAntigas) => [
+      ...tarefasAntigas,
+      {
+        ...{ tarefa, tempo },
+        selecionado: false,
+        completado: false,
+        id: uuidv4(),
+      },
+    ]);
+    setTarefa("");
+    setTempo("00:00");
   };
   return (
     <div>
